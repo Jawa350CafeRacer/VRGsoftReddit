@@ -22,5 +22,18 @@
     <fragment
         android:id="@+id/screenFragment"
         android:name="com.example.vrgsoftreddit.screen.ScreenFragment"
-        android:label="ScreenFragment" />
+        android:label="ScreenFragment" >
+        <action
+            android:id="@+id/action_screenFragment_to_fullScreenFragment"
+            app:destination="@id/fullScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullScreenFragment"
+        android:name="com.example.vrgsoftreddit.FullScreenFragment"
+        android:label="fragment_full_screen"
+        tools:layout="@layout/fragment_full_screen" >
+        <action
+            android:id="@+id/action_fullScreenFragment_to_screenFragment"
+            app:destination="@id/screenFragment" />
+    </fragment>
 </navigation>

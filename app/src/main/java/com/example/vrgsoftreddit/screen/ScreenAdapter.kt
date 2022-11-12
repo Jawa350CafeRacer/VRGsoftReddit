@@ -3,16 +3,24 @@ package com.example.vrgsoftreddit.screen
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.drawToBitmap
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import coil.request.ImageRequest
 import com.bumptech.glide.Glide
+import com.example.vrgsoftreddit.MainActivity
+import com.example.vrgsoftreddit.R
+import com.example.vrgsoftreddit.databinding.ActivityMainBinding
 import com.example.vrgsoftreddit.databinding.PostBinding
 import com.example.vrgsoftreddit.model.Children
 import kotlinx.coroutines.CoroutineScope
@@ -28,28 +36,27 @@ import kotlin.collections.ArrayList
 
 
 class ScreenAdapter : RecyclerView.Adapter<ScreenAdapter.StartViewHolder>() {
-    inner class StartViewHolder(val binding: PostBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class StartViewHolder(val binding: PostBinding) : RecyclerView.ViewHolder(binding.root)
 
     var listener: ((String?) -> Unit)? = null
     private var listScreen = ArrayList<Children>()
-    var after: String? = null
+    private var after: String? = null
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StartViewHolder {
-
         return StartViewHolder(
             PostBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
+                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onBindViewHolder(holder: StartViewHolder, position: Int)  {
-
-
         val item = listScreen[position].data
+
+
 
         holder.binding.apply {
             val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss")
@@ -71,6 +78,14 @@ class ScreenAdapter : RecyclerView.Adapter<ScreenAdapter.StartViewHolder>() {
                 Glide.with(holder.itemView.context).load(item.url_overridden_by_dest)
                     .into(imageView)
             }
+
+
+                imageView.setOnClickListener() {
+                    Navigation.findNavController(holder.itemView).navigate(R.id.action_screenFragment_to_fullScreenFragment)
+
+                }
+
+
 
 
             button.setOnClickListener() {
@@ -140,6 +155,8 @@ class ScreenAdapter : RecyclerView.Adapter<ScreenAdapter.StartViewHolder>() {
                 listener?.invoke(after)
             }
         }
+
+
     }
 
 
@@ -153,4 +170,6 @@ class ScreenAdapter : RecyclerView.Adapter<ScreenAdapter.StartViewHolder>() {
         this.after = after
         notifyDataSetChanged()
     }
+
+
 }

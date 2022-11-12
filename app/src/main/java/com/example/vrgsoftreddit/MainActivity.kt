@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-
         supportActionBar?.hide()
 
     }
