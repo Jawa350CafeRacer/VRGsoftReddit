@@ -1,5 +1,6 @@
 package com.example.vrgsoftreddit.screen
 
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +16,7 @@ class ScreenFragmentViewModel : ViewModel() {
     private var repo = Repository()
     private val _response = MutableLiveData<JsonReddit>()
     val response: LiveData<JsonReddit> = _response
+    var listState: Parcelable? = null
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading

@@ -30,10 +30,20 @@ class ScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupAdapter()
-        setupObservers()
 
+        if (screenViewModel.listState != null){
+            binding.rcView.layoutManager?.onRestoreInstanceState(screenViewModel.listState)
+            screenViewModel.listState = null
+        } else {
+            setupAdapter()
+            setupObservers()
+        }
         screenViewModel.getDataInfo(after = null)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        screenViewModel.listState = binding.rcView.layoutManager?.onSaveInstanceState()
     }
 
 
