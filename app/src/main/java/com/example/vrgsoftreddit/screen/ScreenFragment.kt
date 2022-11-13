@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vrgsoftreddit.databinding.ScreenFragmentBinding
 
 
 class ScreenFragment : Fragment() {
 
-    private lateinit var screenViewModel: ScreenFragmentViewModel
+    private val screenViewModel by lazy { ViewModelProviders.of(this)[(ScreenFragmentViewModel::class.java)] }
     private var _binding: ScreenFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter by lazy { ScreenAdapter() }
@@ -22,10 +22,9 @@ class ScreenFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = ScreenFragmentBinding.inflate(layoutInflater, container, false)
-        screenViewModel = ViewModelProvider(this)[ScreenFragmentViewModel::class.java]
         return binding.root
     }
 
@@ -36,6 +35,7 @@ class ScreenFragment : Fragment() {
 
         screenViewModel.getDataInfo(after = null)
     }
+
 
     private fun setupAdapter() {
         binding.rcView.layoutManager = LinearLayoutManager(requireContext())
@@ -55,4 +55,4 @@ class ScreenFragment : Fragment() {
         }
     }
 
-}
+ }

@@ -46,13 +46,6 @@
                 android:visibility="visible"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="37dp"
-                android:backgroundTint="@color/purple_700"
-                android:text="Save Image" />
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
